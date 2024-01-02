@@ -1,16 +1,16 @@
 <!-- email.component.html -->
-<div>
+<div class="row justify-content-center col-md-6">
   <label for="to">To:</label>
   <input type="email" id="to" [(ngModel)]="emailRequest.to" required>
 <br>
   <label for="subject">Subject:</label>
   <input type="text" id="subject" [(ngModel)]="emailRequest.subject" required>
-
+<br>
   <label for="text">Text:</label>
   <textarea id="text" [(ngModel)]="emailRequest.text" required></textarea>
-
+<br>
   <label for="pdfAttachment">PDF Attachment:</label>
   <input type="file" id="pdfAttachment" (change)="onFileChange($event)" accept=".pdf" required>
-
+<br>
   <button (click)="sendPdf()">Send PDF Email</button>
 </div>
