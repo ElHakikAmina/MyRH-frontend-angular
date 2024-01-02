@@ -3,41 +3,32 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "MyRH-front": {
+    "MyRH-Front": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/my-rh-front",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -55,12 +46,13 @@
               ],
               "outputHashing": "all"
             },
-            "development":  {
+            "development": {
+              "buildOptimizer": false,
               "optimization": false,
+              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "ssr": false,
-              "prerender": false
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -69,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "MyRH-front:build:production"
+              "browserTarget": "MyRH-Front:build:production"
             },
             "development": {
-              "buildTarget": "MyRH-front:build:development"
+              "browserTarget": "MyRH-Front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "MyRH-front:build"
+            "browserTarget": "MyRH-Front:build"
           }
         },
         "test": {
@@ -91,18 +83,20 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "9545bf96-2a96-4cb5-94fe-a10cf008b74c"
   }
 }
